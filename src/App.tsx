@@ -1,43 +1,31 @@
-import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
 import './App.css';
+import HeroList from './components/HeroList';
 import Heros from './pages/Heros';
+import theme from './static/theme';
 
-// const Title = styled.h1`
-//   font-size: 1.5em;
-//   text-align: center;
-//   color: #bf4f74;
-// `;
+const Theme = ({ children }: { children: React.ReactNode }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 
-// Create a Wrapper component that'll render a <section> tag with some styles
-// const Wrapper = styled.section`
-//   padding: 4em;
-//   background: papayawhip;
-// `;
-
-// const Banner = styled.div`
-//   background-color: #282c34;
-//   color: white;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 100px;
-//   font-size: 24px;
-// `;
+const BackGroundContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  background-color: ${(props) => `${props.theme.colors.black}`};
+`;
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/heros" />} /> {/* Redirect to /heros when the app starts */}
-          <Route path="/heros/*" element={<Heros />} />
-        </Routes>
-      </BrowserRouter>
-      {/* <Wrapper>
-        <Title>Hello World, this is my first styled component!</Title>
-      </Wrapper> */}
-    </div>
+    <Theme>
+      <BackGroundContainer>
+        <HeroList />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/heros" />} /> {/* Redirect to /heros when the app starts */}
+            <Route path="/heros/*" element={<Heros />} />
+          </Routes>
+        </BrowserRouter>
+      </BackGroundContainer>
+    </Theme>
   );
 }
 

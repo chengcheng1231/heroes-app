@@ -1,10 +1,8 @@
-import React from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-function HeroAbility() {
+function Heros() {
   // const { heroId } = useParams();
   const location = useLocation();
-  const searchParams = useSearchParams();
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -12,12 +10,12 @@ function HeroAbility() {
   };
 
   // console.log('heroId', heroId);
-  console.log('searchParams', searchParams);
-  console.log('location', location);
+  // console.log('searchParams', searchParams);
+  // console.log('location', location);
 
   // get heroId from location /heros/:heroId
   const heroId = location.pathname.split('/').pop();
-  console.log('heroId', heroId);
+  // console.log('heroId', heroId);
 
   // if (heroId) {
   //   console.log('heroId', heroId);
@@ -26,10 +24,9 @@ function HeroAbility() {
   // }
   return (
     <div>
-      <h1>HeroAbility</h1>
       <button onClick={onClick}>Go to hero 3</button>
     </div>
   );
 }
 
-export default HeroAbility;
+export default Heros;
