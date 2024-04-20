@@ -7,25 +7,32 @@ const HeroListContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  overflow: scroll;
   flex-wrap: wrap;
 `;
 
-const HeroList = () => {
+const HeroList = ({
+  herosDataList,
+}: {
+  herosDataList: {
+    id: string;
+    name: string;
+    image: string;
+  }[];
+}) => {
   // const heroes = useHeroes();
-  console.log('HeroList');
+  console.log('HeroList111');
   return (
     <HeroListContainer>
+      {/* <HeroCard />
       <HeroCard />
       <HeroCard />
       <HeroCard />
       <HeroCard />
       <HeroCard />
-      <HeroCard />
-      <HeroCard />
-      {/* {heroes.map((hero) => (
-        <li key={hero.id}>{hero.name}</li>
-      ))} */}
+      <HeroCard /> */}
+      {herosDataList.map((hero) => (
+        <HeroCard key={hero.id} hero={hero} />
+      ))}
     </HeroListContainer>
   );
 };

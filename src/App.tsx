@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import './App.css';
-import HeroList from './components/HeroList';
 import Heros from './pages/Heros';
 import theme from './static/theme';
 
@@ -17,7 +16,6 @@ function App() {
   return (
     <Theme>
       <BackGroundContainer>
-        <HeroList />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navigate to="/heros" />} /> {/* Redirect to /heros when the app starts */}

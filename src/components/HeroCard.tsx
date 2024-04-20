@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeroCardContainer = styled.div`
@@ -23,13 +24,24 @@ const HeroName = styled.p`
   color: ${(props) => props.theme.colors.white};
 `;
 
-const HeroCard = () => {
+const HeroCard = ({
+  hero,
+}: {
+  hero: {
+    id: string;
+    name: string;
+    image: string;
+  };
+}) => {
+  const navigate = useNavigate();
+  const handleClick = (heroId: string) => {
+    console.log('heroId', heroId);
+    navigate(`/heros/${heroId}`);
+  };
   return (
-    <HeroCardContainer>
-      <HeroAvatar src="http://i.annihil.us/u/prod/marvel/i/mg/6/90/537ba6d49472b/standard_xlarge.jpg" alt="hero" />
-      <HeroName>Iron Man</HeroName>
-      {/* <h1>{hero.name}</h1>
-      <p>{hero.ability}</p> */}
+    <HeroCardContainer onClick={() => handleClick(hero.id)}>
+      <HeroAvatar src={hero.image} alt="hero" />
+      <HeroName>{hero.name}</HeroName>
     </HeroCardContainer>
   );
 };
