@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HeroCard from './HeroCard';
 
@@ -8,6 +9,8 @@ const HeroListContainer = styled.div`
   justify-content: center;
   background-color: transparent;
   flex-wrap: wrap;
+  border: ${(props) => `1px solid ${props.theme.colors.grey}`};
+  width: 100%;
 `;
 
 const HeroList = ({
@@ -19,19 +22,12 @@ const HeroList = ({
     image: string;
   }[];
 }) => {
-  // const heroes = useHeroes();
-  console.log('HeroList111');
+  const location = useLocation();
+  const heroId = location.pathname.split('/').pop();
   return (
     <HeroListContainer>
-      {/* <HeroCard />
-      <HeroCard />
-      <HeroCard />
-      <HeroCard />
-      <HeroCard />
-      <HeroCard />
-      <HeroCard /> */}
       {herosDataList.map((hero) => (
-        <HeroCard key={hero.id} hero={hero} />
+        <HeroCard key={hero.id} hero={hero} isSelected={hero.id === heroId} />
       ))}
     </HeroListContainer>
   );

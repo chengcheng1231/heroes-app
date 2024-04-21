@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const HeroCardContainer = styled.div`
+interface HeroCardContainerProps {
+  isSelected: boolean;
+}
+
+const HeroCardContainer = styled.div<HeroCardContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +15,10 @@ const HeroCardContainer = styled.div`
   padding: 10px;
   border-radius: 15px;
   margin: 0 10px 0 10px;
+  width: 200px;
+  height: 300px;
+  cursor: pointer;
+  background-color: ${(props) => (props.isSelected ? props.theme.colors.red : 'transparent')};
 `;
 
 const HeroAvatar = styled.img`
@@ -18,7 +26,7 @@ const HeroAvatar = styled.img`
 `;
 
 const HeroName = styled.p`
-  font-size: ${(props) => props.theme.fontSizes.large};
+  font-size: ${(props) => props.theme.fontSizes.medium};
   font-family: ${(props) => props.theme.fonts};
   margin: 10px;
   color: ${(props) => props.theme.colors.white};
@@ -26,20 +34,22 @@ const HeroName = styled.p`
 
 const HeroCard = ({
   hero,
+  isSelected,
 }: {
   hero: {
     id: string;
     name: string;
     image: string;
   };
+  isSelected: boolean;
 }) => {
   const navigate = useNavigate();
   const handleClick = (heroId: string) => {
-    console.log('heroId', heroId);
     navigate(`/heros/${heroId}`);
   };
+
   return (
-    <HeroCardContainer onClick={() => handleClick(hero.id)}>
+    <HeroCardContainer onClick={() => handleClick(hero.id)} isSelected={isSelected}>
       <HeroAvatar src={hero.image} alt="hero" />
       <HeroName>{hero.name}</HeroName>
     </HeroCardContainer>
