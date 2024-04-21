@@ -11,7 +11,6 @@ const apiClient = (() => {
   });
 
   const errHandling = function (error: any) {
-    console.log('error', error);
     return { error: error };
   };
 

@@ -13,13 +13,6 @@ import {
   FETCH_HERO_PROFILE_SUCCESS,
 } from '../actions/heros';
 
-export function* baseSaga(action: IAction) {
-  console.log('baseSaga', action);
-  try {
-    return 'success';
-  } catch (error) {}
-}
-
 export function* fetchHerosListSaga() {
   const { response, error } = yield apiClient.get('https://hahow-recruit.herokuapp.com/heroes');
   if (response) {

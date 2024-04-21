@@ -51,7 +51,6 @@ export function herosReducer(state = initialState, action: IAction = { type: '' 
       };
     case FETCH_HERO_PROFILE_SUCCESS:
     case FETCH_HEROS_LIST_SUCCESS:
-      console.log('action.payload', action.payload);
       return {
         ...state,
         loading: false,
