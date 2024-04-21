@@ -21,10 +21,10 @@ const MemoizedHerosList = memo(
     }[];
   }) => {
     return <HeroList herosDataList={herosDataList} />;
+  },
+  (prevProps, nextProps) => {
+    return JSON.stringify(prevProps.herosDataList) === JSON.stringify(nextProps.herosDataList);
   }
-  // (prevProps, nextProps) => {
-  //   return JSON.stringify(prevProps.herosDataList) === JSON.stringify(nextProps.herosDataList);
-  // }
 );
 
 const HeroContainer = styled.div`
