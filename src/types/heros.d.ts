@@ -6,3 +6,5 @@ type heroAbilityType = {
   agi: number;
   luk: number;
 };
+
+export { heroAbilityType };

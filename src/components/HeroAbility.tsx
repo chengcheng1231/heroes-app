@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../elements/Button';
+import { heroAbilityType } from '../types/heros';
 
 const HeroAbilityContainer = styled.div`
   display: flex;
@@ -98,6 +99,7 @@ const HeroAbility = ({
   const [remainingPoints, setRemainingPoints] = useState(0);
   const [alert, setAlert] = useState('');
 
+  // handle ability value change
   const handleAbilityValueChange = (key: string, value: number) => {
     // make sure remaining points is not negative
     const changingRemainingPoints =
@@ -116,6 +118,7 @@ const HeroAbility = ({
     setRemainingPoints(changingRemainingPoints);
   };
 
+  // edit hero profile
   const handleSave = () => {
     if (remainingPoints > 0) {
       setAlert('請分配完剩餘點數');
@@ -124,9 +127,15 @@ const HeroAbility = ({
     editHeroProfile(heroId, abilityValuesState);
   };
 
+  // update abilityValuesState when abilityValues is changed by redux store
   useEffect(() => {
     setAbilityValuesState(abilityValues);
   }, [abilityValues]);
+
+  // if heroId is changed, reset remaining points
+  useEffect(() => {
+    setRemainingPoints(0);
+  }, [heroId]);
 
   return (
     <HeroAbilityContainer>

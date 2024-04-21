@@ -1,9 +1,13 @@
 import { IAction } from '../actionTypes';
 import {
+  EDIT_HERO_PROFILE,
+  EDIT_HERO_PROFILE_ERROR,
+  EDIT_HERO_PROFILE_SUCCESS,
   FETCH_HEROS_LIST,
   FETCH_HEROS_LIST_ERROR,
   FETCH_HEROS_LIST_SUCCESS,
   FETCH_HERO_PROFILE,
+  FETCH_HERO_PROFILE_ERROR,
   FETCH_HERO_PROFILE_SUCCESS,
 } from '../actions/heros';
 
@@ -39,6 +43,7 @@ export function herosReducer(state = initialState, action: IAction = { type: '' 
   switch (action.type) {
     case FETCH_HEROS_LIST:
     case FETCH_HERO_PROFILE:
+    case EDIT_HERO_PROFILE:
       return {
         ...state,
         loading: true,
@@ -46,12 +51,20 @@ export function herosReducer(state = initialState, action: IAction = { type: '' 
       };
     case FETCH_HERO_PROFILE_SUCCESS:
     case FETCH_HEROS_LIST_SUCCESS:
+      console.log('action.payload', action.payload);
       return {
         ...state,
         loading: false,
         [key]: action.payload,
       };
+    case EDIT_HERO_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
     case FETCH_HEROS_LIST_ERROR:
+    case FETCH_HERO_PROFILE_ERROR:
+    case EDIT_HERO_PROFILE_ERROR:
       return {
         ...state,
         loading: false,

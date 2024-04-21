@@ -4,7 +4,9 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HeroAbility from '../components/HeroAbility';
 import HeroList from '../components/HeroList';
+import LoadingOverlay from '../elements/LoadingOverlay';
 import { getPathAfterPrefix } from '../shared/utils';
+import { heroAbilityType } from '../types/heros';
 
 type dispatchType = (action: { type: string; payload?: any }) => void;
 
@@ -35,12 +37,14 @@ const HeroContainer = styled.div`
 `;
 
 function Heros({
+  loading,
   herosDataList,
   heroAbility,
   fetchHerosList,
   fetchHeroProfile,
   editHeroProfile,
 }: {
+  loading: boolean;
   herosDataList: {
     id: string;
     name: string;
@@ -72,6 +76,7 @@ function Heros({
 
   return (
     <HeroContainer>
+      {loading ? <LoadingOverlay /> : null}
       <MemoizedHerosList herosDataList={herosDataList} />
       {heroId ? <HeroAbility heroId={heroId} abilityValues={heroAbility} editHeroProfile={editHeroProfile} /> : null}
     </HeroContainer>
@@ -81,6 +86,7 @@ function Heros({
 const mapStateToProps = (state: any) => ({
   herosDataList: state.heros.herosDataList,
   heroAbility: state.heros.heroAbility,
+  loading: state.heros.loading,
 });
 
 const mapDispatchToProps = (dispatch: dispatchType) => {

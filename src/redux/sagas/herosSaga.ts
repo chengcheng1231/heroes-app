@@ -49,6 +49,13 @@ export function* editHeroProfileSaga(action: IAction) {
     data: heroProfile,
   });
 
+  if (response && response === 'OK') {
+    yield put({
+      type: FETCH_HERO_PROFILE,
+      payload: { heroId },
+    });
+  }
+
   if (response) {
     yield put({ type: EDIT_HERO_PROFILE_SUCCESS, payload: response });
   }
