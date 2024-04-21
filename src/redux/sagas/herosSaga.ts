@@ -2,6 +2,9 @@ import { all, put, takeLatest } from 'redux-saga/effects';
 import apiClient from '../../shared/api/api.config';
 import { IAction } from '../actionTypes';
 import {
+  EDIT_HERO_PROFILE,
+  EDIT_HERO_PROFILE_ERROR,
+  EDIT_HERO_PROFILE_SUCCESS,
   FETCH_HEROS_LIST,
   FETCH_HEROS_LIST_ERROR,
   FETCH_HEROS_LIST_SUCCESS,
@@ -40,6 +43,25 @@ export function* fetchHeroProfileSaga(action: IAction) {
   }
 }
 
+export function* editHeroProfileSaga(action: IAction) {
+  const { heroId, heroProfile } = action.payload;
+  const { response, error } = yield apiClient.patch(`https://hahow-recruit.herokuapp.com/heroes/${heroId}/profile`, {
+    data: heroProfile,
+  });
+
+  if (response) {
+    yield put({ type: EDIT_HERO_PROFILE_SUCCESS, payload: response });
+  }
+
+  if (error) {
+    yield put({ type: EDIT_HERO_PROFILE_ERROR, payload: error });
+  }
+}
+
 export function* herosSaga() {
-  yield all([takeLatest(FETCH_HEROS_LIST, fetchHerosListSaga), takeLatest(FETCH_HERO_PROFILE, fetchHeroProfileSaga)]);
+  yield all([
+    takeLatest(FETCH_HEROS_LIST, fetchHerosListSaga),
+    takeLatest(FETCH_HERO_PROFILE, fetchHeroProfileSaga),
+    takeLatest(EDIT_HERO_PROFILE, editHeroProfileSaga),
+  ]);
 }

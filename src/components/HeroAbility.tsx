@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../elements/Button';
 
@@ -65,33 +66,86 @@ const AbilityValueControlledSection = styled.div`
   }
 `;
 
+const RemainingText = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-family: ${(props) => props.theme.fonts};
+  color: ${(props) => props.theme.colors.white};
+  margin: 8px 0px;
+`;
+
+const AlertText = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.small};
+  font-family: ${(props) => props.theme.fonts};
+  color: ${(props) => props.theme.colors.red};
+  margin: 0px 0px 10px 0px;
+`;
+
 const HeroAbility = ({
+  heroId,
   abilityValues,
+  editHeroProfile,
 }: {
-  abilityValues: {
-    str: number;
-    int: number;
-    agi: number;
-    luk: number;
-  };
+  heroId: string;
+  abilityValues: heroAbilityType;
+  editHeroProfile: (heroId: string, heroProfile: heroAbilityType) => void;
 }) => {
+  const [abilityValuesState, setAbilityValuesState] = useState({
+    str: 0,
+    int: 0,
+    agi: 0,
+    luk: 0,
+  });
+  const [remainingPoints, setRemainingPoints] = useState(0);
+  const [alert, setAlert] = useState('');
+
+  const handleAbilityValueChange = (key: string, value: number) => {
+    // make sure remaining points is not negative
+    const changingRemainingPoints =
+      remainingPoints + (abilityValuesState[key as keyof typeof abilityValuesState] - value);
+    if (changingRemainingPoints < 0) {
+      return;
+    }
+
+    // make sure ability value is not negative
+    if (value < 0) {
+      return;
+    }
+
+    setAlert('');
+    setAbilityValuesState({ ...abilityValuesState, [key]: value });
+    setRemainingPoints(changingRemainingPoints);
+  };
+
+  const handleSave = () => {
+    if (remainingPoints > 0) {
+      setAlert('請分配完剩餘點數');
+      return;
+    }
+    editHeroProfile(heroId, abilityValuesState);
+  };
+
+  useEffect(() => {
+    setAbilityValuesState(abilityValues);
+  }, [abilityValues]);
+
   return (
     <HeroAbilityContainer>
       <AbilityValueContainer>
-        {Object.entries(abilityValues).map(([key, value]) => (
+        {Object.entries(abilityValuesState).map(([key, value]) => (
           <AbilityValueSection key={key}>
             <AbilityValueTitle>{key.toUpperCase()}</AbilityValueTitle>
             <AbilityValueButtonSection>
-              <Button text="+" onClick={() => console.log('click')} width="30px" height="30px" />
+              <Button text="+" onClick={() => handleAbilityValueChange(key, value + 1)} width="30px" height="30px" />
               <AbilityValue>{value}</AbilityValue>
-              <Button text="-" onClick={() => console.log('click')} width="30px" height="30px" />
+              <Button text="-" onClick={() => handleAbilityValueChange(key, value - 1)} width="30px" height="30px" />
             </AbilityValueButtonSection>
           </AbilityValueSection>
         ))}
       </AbilityValueContainer>
       <AbilityValueControlledSection>
-        <AbilityValue>剩餘點數: 0</AbilityValue>
-        <Button text="儲存" onClick={() => console.log('儲存')} width="120px" height="30px" />
+        <RemainingText>剩餘點數: {remainingPoints}</RemainingText>
+        {alert && <AlertText>{alert}</AlertText>}
+        <Button text="儲存" onClick={() => handleSave()} width="120px" height="30px" />
       </AbilityValueControlledSection>
     </HeroAbilityContainer>
   );
