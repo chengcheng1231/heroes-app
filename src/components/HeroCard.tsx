@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface HeroCardContainerProps {
-  isSelected: boolean;
+  selected: boolean;
 }
 
 const HeroCardContainer = styled.div<HeroCardContainerProps>`
@@ -18,7 +18,7 @@ const HeroCardContainer = styled.div<HeroCardContainerProps>`
   width: 200px;
   height: 300px;
   cursor: pointer;
-  background-color: ${(props) => (props.isSelected ? props.theme.colors.red : 'transparent')};
+  background-color: ${(props) => (props.selected ? props.theme.colors.red : 'transparent')};
 `;
 
 const HeroAvatar = styled.img`
@@ -34,14 +34,14 @@ const HeroName = styled.p`
 
 const HeroCard = ({
   hero,
-  isSelected,
+  selected,
 }: {
   hero: {
     id: string;
     name: string;
     image: string;
   };
-  isSelected: boolean;
+  selected: boolean;
 }) => {
   const navigate = useNavigate();
   const handleClick = (heroId: string) => {
@@ -49,7 +49,7 @@ const HeroCard = ({
   };
 
   return (
-    <HeroCardContainer onClick={() => handleClick(hero.id)} isSelected={isSelected}>
+    <HeroCardContainer onClick={() => handleClick(hero.id)} selected={selected}>
       <HeroAvatar src={hero.image} alt="hero" />
       <HeroName>{hero.name}</HeroName>
     </HeroCardContainer>

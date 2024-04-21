@@ -27,7 +27,7 @@ const HeroList = ({
   return (
     <HeroListContainer>
       {herosDataList.map((hero) => (
-        <HeroCard key={hero.id} hero={hero} isSelected={hero.id === heroId} />
+        <HeroCard key={hero.id} hero={hero} selected={hero.id === heroId} />
       ))}
     </HeroListContainer>
   );
