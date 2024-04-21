@@ -1,44 +1,56 @@
+import { IAction } from '../actionTypes';
 import {
-  FETCH_DATA_ERROR,
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
   FETCH_HEROS_LIST,
   FETCH_HEROS_LIST_ERROR,
   FETCH_HEROS_LIST_SUCCESS,
+  FETCH_HERO_PROFILE,
+  FETCH_HERO_PROFILE_SUCCESS,
 } from '../actions/heros';
-import { IAction } from '../actionTypes';
 
 const initialState = {
   loading: false,
   data: [],
   error: null,
   herosDataList: [],
+  heroAbility: {},
 };
 
+function getKey(actionKey: string) {
+  let key = '';
+
+  switch (actionKey) {
+    case 'HEROS_LIST':
+      key = 'herosDataList';
+      break;
+    case 'HERO_PROFILE':
+      key = 'heroAbility';
+      break;
+    default:
+      break;
+  }
+
+  return key;
+}
+
 export function herosReducer(state = initialState, action: IAction = { type: '' }) {
+  const actionKey = action.type.substring(action.type.indexOf('/') + 1, action.type.lastIndexOf('/'));
+  const key = getKey(actionKey);
+
   switch (action.type) {
-    case FETCH_DATA_REQUEST:
     case FETCH_HEROS_LIST:
+    case FETCH_HERO_PROFILE:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case FETCH_DATA_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
+    case FETCH_HERO_PROFILE_SUCCESS:
     case FETCH_HEROS_LIST_SUCCESS:
-      console.log('appReducer4', action.payload);
-
       return {
         ...state,
         loading: false,
-        herosDataList: action.payload,
+        [key]: action.payload,
       };
-    case FETCH_DATA_ERROR:
     case FETCH_HEROS_LIST_ERROR:
       return {
         ...state,

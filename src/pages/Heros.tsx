@@ -6,7 +6,7 @@ import HeroAbility from '../components/HeroAbility';
 import HeroList from '../components/HeroList';
 import { getPathAfterPrefix } from '../shared/utils';
 
-type dispatchType = (action: { type: string }) => void;
+type dispatchType = (action: { type: string; payload?: any }) => void;
 
 // React.memo(Component, [areEqual(prevProps, nextProps)]);
 
@@ -38,14 +38,23 @@ const HeroContainer = styled.div`
 
 function Heros({
   herosDataList,
+  heroAbility,
   fetchHerosList,
+  fetchHeroProfile,
 }: {
   herosDataList: {
     id: string;
     name: string;
     image: string;
   }[];
+  heroAbility: {
+    str: number;
+    int: number;
+    agi: number;
+    luk: number;
+  };
   fetchHerosList: () => void;
+  fetchHeroProfile: (heroId: string) => void;
 }) {
   const location = useLocation();
   const prefix = '/heros';
@@ -56,34 +65,37 @@ function Heros({
   useEffect(() => {
     fetchHerosList();
   }, []);
-  // if (heroId) {
-  //   console.log('heroId', heroId);
-  // } else {
-  //   console.log('No heroId');
-  // }
-  const abilityValues = {
-    str: 2,
-    int: 7,
-    agi: 9,
-    luk: 7,
-  };
+
+  useEffect(() => {
+    if (heroId) {
+      fetchHeroProfile(heroId);
+    }
+  }, [heroId]);
+
   return (
     <HeroContainer>
       <MemoizedHerosList herosDataList={herosDataList} />
-      {heroId ? <HeroAbility abilityValues={abilityValues} /> : null}
+      {heroId ? <HeroAbility abilityValues={heroAbility} /> : null}
     </HeroContainer>
   );
 }
 
 const mapStateToProps = (state: any) => ({
   herosDataList: state.heros.herosDataList,
+  heroAbility: state.heros.heroAbility,
 });
 
 const mapDispatchToProps = (dispatch: dispatchType) => {
   return {
     fetchHerosList: () => {
       dispatch({
-        type: 'FETCH_HEROS_LIST',
+        type: 'FETCH/HEROS_LIST',
+      });
+    },
+    fetchHeroProfile: (heroId: string) => {
+      dispatch({
+        type: 'FETCH/HERO_PROFILE',
+        payload: { heroId },
       });
     },
   };
