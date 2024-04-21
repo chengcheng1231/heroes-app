@@ -65,14 +65,14 @@ function Heros({
   // fetch heros list when component is mounted
   useEffect(() => {
     fetchHerosList();
-  }, []);
+  }, [fetchHerosList]);
 
   // fetch hero profile when heroId is available
   useEffect(() => {
     if (heroId) {
       fetchHeroProfile(heroId);
     }
-  }, [heroId]);
+  }, [heroId, fetchHeroProfile]);
 
   return (
     <HeroContainer>
