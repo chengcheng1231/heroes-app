@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,6 +6,8 @@ import HeroAbility from '../components/HeroAbility';
 import HeroList from '../components/HeroList';
 
 type dispatchType = (action: { type: string }) => void;
+
+// React.memo(Component, [areEqual(prevProps, nextProps)]);
 
 const MemoizedHerosList = memo(
   ({
@@ -17,9 +19,11 @@ const MemoizedHerosList = memo(
       image: string;
     }[];
   }) => {
-    console.log('MemoizedHerosList');
     return <HeroList herosDataList={herosDataList} />;
   }
+  // (prevProps, nextProps) => {
+  //   return JSON.stringify(prevProps.herosDataList) === JSON.stringify(nextProps.herosDataList);
+  // }
 );
 
 const HeroContainer = styled.div`
@@ -34,6 +38,7 @@ const HeroContainer = styled.div`
 function Heros({
   herosDataList,
   fetchData,
+  fetchHerosList,
 }: {
   herosDataList: {
     id: string;
@@ -41,6 +46,7 @@ function Heros({
     image: string;
   }[];
   fetchData: () => void;
+  fetchHerosList: () => void;
 }) {
   const location = useLocation();
 
@@ -48,6 +54,9 @@ function Heros({
   const heroId = location.pathname.split('/').pop();
   console.log('heroId', heroId);
 
+  useEffect(() => {
+    fetchHerosList();
+  }, []);
   // if (heroId) {
   //   console.log('heroId', heroId);
   // } else {
@@ -75,28 +84,7 @@ function Heros({
 }
 
 const mapStateToProps = (state: any) => ({
-  herosDataList: [
-    {
-      id: '1',
-      name: 'Daredevil',
-      image: 'http://i.annihil.us/u/prod/marvel/i/mg/6/90/537ba6d49472b/standard_xlarge.jpg',
-    },
-    {
-      id: '2',
-      name: 'Thor',
-      image: 'http://i.annihil.us/u/prod/marvel/i/mg/5/a0/537bc7036ab02/standard_xlarge.jpg',
-    },
-    {
-      id: '3',
-      name: 'Iron Man',
-      image: 'http://i.annihil.us/u/prod/marvel/i/mg/6/a0/55b6a25e654e6/standard_xlarge.jpg',
-    },
-    {
-      id: '4',
-      name: 'Hulk',
-      image: 'http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/standard_xlarge.jpg',
-    },
-  ],
+  herosDataList: state.heros.herosDataList,
 });
 
 const mapDispatchToProps = (dispatch: dispatchType) => {
@@ -104,6 +92,11 @@ const mapDispatchToProps = (dispatch: dispatchType) => {
     fetchData: () => {
       dispatch({
         type: 'FETCH_DATA_REQUEST',
+      });
+    },
+    fetchHerosList: () => {
+      dispatch({
+        type: 'FETCH_HEROS_LIST',
       });
     },
   };

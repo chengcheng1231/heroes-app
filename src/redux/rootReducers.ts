@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { appReducer } from './reducers/dataReducer';
-// 導入其他的 reducer
+import { herosReducer } from './reducers/heros';
 
 const rootReducer = combineReducers({
-  data: appReducer,
-  // 在這裡合併其他的 reducer
+  heros: herosReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
