@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HeroAbility from '../components/HeroAbility';
 import HeroList from '../components/HeroList';
+import { getPathAfterPrefix } from '../shared/utils';
 
 type dispatchType = (action: { type: string }) => void;
 
@@ -37,7 +38,6 @@ const HeroContainer = styled.div`
 
 function Heros({
   herosDataList,
-  fetchData,
   fetchHerosList,
 }: {
   herosDataList: {
@@ -45,13 +45,12 @@ function Heros({
     name: string;
     image: string;
   }[];
-  fetchData: () => void;
   fetchHerosList: () => void;
 }) {
   const location = useLocation();
-
+  const prefix = '/heros';
   // get heroId from location /heros/:heroId
-  const heroId = location.pathname.split('/').pop();
+  const heroId = getPathAfterPrefix(location.pathname, prefix);
   console.log('heroId', heroId);
 
   useEffect(() => {
@@ -71,14 +70,7 @@ function Heros({
   return (
     <HeroContainer>
       <MemoizedHerosList herosDataList={herosDataList} />
-      <HeroAbility abilityValues={abilityValues} />
-      <button
-        onClick={() => {
-          fetchData();
-        }}
-      >
-        redux test
-      </button>
+      {heroId ? <HeroAbility abilityValues={abilityValues} /> : null}
     </HeroContainer>
   );
 }
@@ -89,11 +81,6 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: dispatchType) => {
   return {
-    fetchData: () => {
-      dispatch({
-        type: 'FETCH_DATA_REQUEST',
-      });
-    },
     fetchHerosList: () => {
       dispatch({
         type: 'FETCH_HEROS_LIST',
