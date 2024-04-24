@@ -140,6 +140,8 @@ npm run build
 
 3. 在使用 dotenv 時在環境變數檔案設定 API domain 沒效果，最後發現是因為環境變數的名稱沒有以 `REACT_APP` 作為前綴，參考此[文件](https://pjchender.dev/react-bootcamp/docs/bootcamp/week4/create-react-app-setting/)
 
+4. vercel 在部署時，因為沒有設定環境變數，所以在部署時會出現錯誤打不了 API 的問題，最後透過 vercel 的環境變數設定並且重新部署，即可解決此問題
+
 # Source
 
 1. 產生文字：[fontmeme](https://fontmeme.com/netflix-font/#textstyle)
