@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react-redux": "^7.1.33",
     "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.1",
@@ -25,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "commit": "git-cz",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "dev": "dotenv -e .env.development react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -46,7 +49,12 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0"
+    "@eslint/js": "^9.1.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "globals": "^15.0.0",
+    "typescript-eslint": "^7.7.1"
   },
   "config": {
     "commitizen": {

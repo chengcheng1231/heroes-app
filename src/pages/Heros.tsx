@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,24 +9,7 @@ import { getPathAfterPrefix } from '../shared/utils';
 import herosBackground from '../static/images/herosBackground.webp';
 import { heroAbilityType } from '../types/heros';
 
-type dispatchType = (action: { type: string; payload?: any }) => void;
-
-const MemoizedHerosList = memo(
-  ({
-    herosDataList,
-  }: {
-    herosDataList: {
-      id: string;
-      name: string;
-      image: string;
-    }[];
-  }) => {
-    return <HeroList herosDataList={herosDataList} />;
-  },
-  (prevProps, nextProps) => {
-    return JSON.stringify(prevProps.herosDataList) === JSON.stringify(nextProps.herosDataList);
-  }
-);
+type dispatchType = (action: { type: string; payload?: { heroId?: string; heroProfile?: heroAbilityType } }) => void;
 
 const PageContainer = styled.div`
   position: relative;
@@ -134,14 +117,24 @@ function Heros({
       </Banner>
       <HeroContainer>
         {loading ? <LoadingOverlay /> : null}
-        <MemoizedHerosList herosDataList={herosDataList} />
+        <HeroList herosDataList={herosDataList} />
         {heroId ? <HeroAbility heroId={heroId} abilityValues={heroAbility} editHeroProfile={editHeroProfile} /> : null}
       </HeroContainer>
     </PageContainer>
   );
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: {
+  heros: {
+    herosDataList: {
+      id: string;
+      name: string;
+      image: string;
+    }[];
+    heroAbility: heroAbilityType;
+    loading: boolean;
+  };
+}) => ({
   herosDataList: state.heros.herosDataList,
   heroAbility: state.heros.heroAbility,
   loading: state.heros.loading,

@@ -1,23 +1,27 @@
 import axios from 'axios';
-// import appConfig from './app.config';
 
 const apiClient = (() => {
   const client = axios.create({
-    // baseURL: appConfig.API_DOMAIN,
+    baseURL: process.env.REACT_APP_API_URL,
     headers: {
       'Content-Type': 'application/json',
-      // 'Auth-Scope': appConfig.AUTH_SCOPE,
     },
   });
 
+  // It still not yet to define the type of error
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const errHandling = function (error: any) {
     return { error: error };
   };
 
+  // It still not yet to define the type of response
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const resHandling = (response: any) => ({ response: response.data });
 
   return {
-    get: (url: string, params?: any) => client.get(url, params).then(resHandling).catch(errHandling),
+    get: (url: string) => client.get(url).then(resHandling).catch(errHandling),
+    // It still not yet to define the type of params
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     patch: (url: string, params: any) => client.patch(url, params.data, params).then(resHandling).catch(errHandling),
   };
 })();

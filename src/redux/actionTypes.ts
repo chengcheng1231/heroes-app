@@ -1,10 +1,12 @@
 export interface IAction {
   type: string;
-  error?: any;
-  data?: any;
-  query?: any;
-  payload?: any;
-  reloadData?: any;
-  setting?: any;
-  loadMoreData?: any;
+  payload?: {
+    heroId: string;
+    heroProfile: {
+      str: number;
+      int: number;
+      agi: number;
+      luk: number;
+    };
+  };
 }
