@@ -28,6 +28,7 @@ const BackGroundContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 70vw;
+  max-width: 1400px;
   margin: 0 auto;
   background-color: ${(props) => `${props.theme.colors.black}`};
 `;
@@ -37,7 +38,7 @@ function App() {
     <Provider store={store}>
       <Theme>
         <Header>
-          <HeaderImage src={herosImage} alt="logo" width={100} object-fit="cover" />
+          <HeaderImage src={herosImage} alt="logo" width={100} />
         </Header>
         <BackGroundContainer>
           <BrowserRouter>

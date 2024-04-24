@@ -8,6 +8,7 @@ const HeroAbilityContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   border-radius: 15px;
+  max-width: 1000px;
   width: 100%;
   z-index: 2;
   margin: 30px 0px 0px 0px;

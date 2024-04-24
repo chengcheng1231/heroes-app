@@ -67,7 +67,7 @@ const BannerCover = styled.div`
   top: 0;
   right: 0;
   z-index: 1;
-  width: 65vw;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.35);
 `;
@@ -81,7 +81,11 @@ const HeroContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin: 40vh auto 0 auto;
+  margin: 35vh auto 0 auto;
+
+  @media (max-width: ${(props) => props.theme.devicesWidth.laptop}) {
+    margin: 20vh auto 0 auto;
+  }
 `;
 
 function Heros({
