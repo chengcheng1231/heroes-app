@@ -10,7 +10,7 @@ const HeroAbilityContainer = styled.div`
   border: ${(props) => `1px solid ${props.theme.colors.grey}`};
   border-radius: 15px;
   width: 100%;
-
+  z-index: 2;
   @media (max-width: ${(props) => props.theme.devicesWidth.mobile}) {
     flex-direction: column;
   }

@@ -6,6 +6,7 @@ import HeroAbility from '../components/HeroAbility';
 import HeroList from '../components/HeroList';
 import LoadingOverlay from '../elements/LoadingOverlay';
 import { getPathAfterPrefix } from '../shared/utils';
+import herosBackground from '../static/images/herosBackground.webp';
 import { heroAbilityType } from '../types/heros';
 
 type dispatchType = (action: { type: string; payload?: any }) => void;
@@ -27,6 +28,40 @@ const MemoizedHerosList = memo(
   }
 );
 
+const Banner = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  width: 65vw;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 42%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 30%, rgba(0, 0, 0, 0.9) 100%);
+    z-index: 1;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.9) 100%);
+    z-index: 1;
+  }
+`;
+
+const BackgroundImage = styled.img`
+  width: 100%;
+`;
+
 const HeroContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,6 +69,7 @@ const HeroContainer = styled.div`
   border-radius: 15px;
   width: 80vw;
   max-width: 1200px;
+  position: relative;
 `;
 
 function Heros({
@@ -75,11 +111,16 @@ function Heros({
   }, [heroId, fetchHeroProfile]);
 
   return (
-    <HeroContainer>
-      {loading ? <LoadingOverlay /> : null}
-      <MemoizedHerosList herosDataList={herosDataList} />
-      {heroId ? <HeroAbility heroId={heroId} abilityValues={heroAbility} editHeroProfile={editHeroProfile} /> : null}
-    </HeroContainer>
+    <>
+      <Banner>
+        <BackgroundImage src={herosBackground} alt="herosBackground" />
+      </Banner>
+      <HeroContainer>
+        {loading ? <LoadingOverlay /> : null}
+        <MemoizedHerosList herosDataList={herosDataList} />
+        {heroId ? <HeroAbility heroId={heroId} abilityValues={heroAbility} editHeroProfile={editHeroProfile} /> : null}
+      </HeroContainer>
+    </>
   );
 }
 
