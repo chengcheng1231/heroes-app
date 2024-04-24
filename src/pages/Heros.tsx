@@ -97,6 +97,15 @@ function Heros({
   const heroId = getPathAfterPrefix(location.pathname, prefix);
   // End
 
+  // change document title based on heroId
+  useEffect(() => {
+    if (heroId) {
+      document.title = 'Hero Profile Page';
+    } else {
+      document.title = 'Hero List Page';
+    }
+  }, [heroId]);
+
   // fetch heros list when component is mounted
   useEffect(() => {
     fetchHerosList();
