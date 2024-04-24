@@ -1,74 +1,119 @@
 # Demo
 
-[Link](https://heros-app-pink.vercel.app/heros/4)
+1. 透過 github + vercel 的自動部署，可以透過以下的連結進行瀏覽
+   [Link](https://heros-app-pink.vercel.app/heros/4)
 
-# Getting Started with Create React App
+2. 此專案有基本的 RWD，可以透過手機瀏覽器進行瀏覽
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 我們該如何執行完成的 package
 
-## Available Scripts
+## Development
 
-In the project directory, you can run:
+執行以下的指令，即可在本地端啟動專案
 
-### `npm start`
+```bash
+npm install & npm run start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+執行完畢後，即可在瀏覽器中輸入 `http://localhost:3000` 進行瀏覽
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Production
 
-### `npm test`
+執行以下的指令，即可將專案進行打包，並在根目錄下產生 `build` 資料夾，最後即可將該資料夾部署至網頁伺服器
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm run build
+```
 
-### `npm run build`
+# 專案的架構、Web 的架構邏輯
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+├── components                  # 頁面需要的 components
+├── elements                    # 一些 stateles 的元件，如 button、loading 等等
+├── pages                       # 依循 url 渲染的頁面
+├── redux                       # redux 的相關設定
+│   ├── actions                 # 觸發資料變動的 action
+│   ├── reducers                # 生成 state 的 function，並改變 store 的 state
+│   ├── sagas                   # 用來處理非同步的 generator function
+│   ├── actionTypes.ts          # 定義所有的 action types
+│   ├── rootReducers.ts         # 將所有的 reducers 合併成一個
+│   ├── rootSagas.ts            # 將所有的 sagas 合併成一個
+├── shared                      # 一些共用的 function
+│   ├── api.config.ts           # 定義 api 的基本設定，包括 api 的 base url
+│   ├── utils.ts                # 一些共用的 function
+├── static                      # 放靜態資源的地方，包含 images、全域的 color 以及 RWD 的 media query
+├── types                       # 個別的型別定義
+├── App.tsx                     # 主要的 App component，包含 router 的設定
+├── index.tsx                   # 進入點
+├── README.md                   # 此 README
+└── package.json                # 這個 package 的相依套件、各種 scripts 等等
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 你對於所有使用到的第三方 library 的理解，以及他們的功能簡介
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- styled-components:
 
-### `npm run eject`
+  - 用來處理 css in js 的 library，可以透過 styled-components 來寫 css，並透過 props 來動態的改變 css 的樣式
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- redux:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - 處理專案的狀態管理，將所有的 state 都放在一個 store 裡，並透過 reducer function 來改變 state
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- redux-saga:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - 用來處理非同步的 action，如 api 的 request
+  - 可以透過 generator function 來處理非同步的 action，並使用 call、takeEvery 或是 takeLatest 等等做更細膩的操作
 
-## Learn More
+- react-router-dom:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  - 用來處理 react 的 router，可以透過 react-router-dom 來設定 router，並透過 Route、Link 等等來設定 router 的路徑
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- axios:
 
-### Code Splitting
+  - 用來處理 api 的 request，可以透過 axios 的 api 來發送 request，並處理 response
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- cz-conventional-changelog:
+  - 用來規範 commit message 的格式，能更詳細的描述 commit 的內容
 
-### Analyzing the Bundle Size
+# 你在程式碼中寫註解的原則，遇到什麼狀況會寫註解
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. 在 utils 或是 shared 的 function 中，會寫註解來描述 function 的功能
+2. 在頁面中，會寫註解來描述 useEffect 的目的，或是轉換資料再 render 的目的
+3. 使用 react memo 來優化 component 的原因，會寫註解來描述為什麼要使用 memo
 
-### Making a Progressive Web App
+# 在這份專案中你遇到的困難、問題，以及解決的方法
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. React-router-dom 如何設定初始路徑
 
-### Advanced Configuration
+   - 在 App.tsx 中設定路徑時在猶豫是否要分兩個路徑 /heros 和 /heros/:heroId，最後考慮到不重新渲染 Hero List，所以最後選擇只設定 `/heros/:heroId` 的路徑，並透過 location.pathname 來判斷 `/heros/:heroId` 的 heroId 是什麼，若存在則顯示 Hero detailed 的能力值
+   - 並在 `/` 的路徑透過 `<Navigate to="/heros/:heroId" />` 來讓使用者導向 `/heros/:heroId`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```typescript
+   // --- other code ---
+   <Routes>
+     <Route path="/" element={<Navigate to="/heros/:heroId" />} />
+     <Route path="/heros/:heroId" element={<Herors />} />
+   </Routes>
+   ```
 
-### Deployment
+2. 第一次使用 styled-components + typescript 但不確認要如何設定型別
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   - 解法就是若要設定 props 的型別，可以在 styled-component 後面加上 `<IButtonProps>` 來設定 props 的型別
 
-### `npm run build` fails to minify
+   ```typescript
+   import { DefaultTheme } from 'styled-components';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   interface IButtonProps {
+     color?: string;
+   }
+
+   const Button = styled.button<IButtonProps>`
+     color: ${(props) => props.color || props.theme.colors.primary};
+   `;
+   ```
+
+   使用時則可以透過 props 來傳遞 color 的值
+
+   ```typescript
+   <Button color="red">Click me</Button>
+   ```
