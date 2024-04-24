@@ -28,12 +28,16 @@ const MemoizedHerosList = memo(
   }
 );
 
+const PageContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
 const Banner = styled.div`
   position: absolute;
   top: 0;
   right: 0;
   z-index: 0;
-  width: 65vw;
 
   &:before {
     content: '';
@@ -58,6 +62,16 @@ const Banner = styled.div`
   }
 `;
 
+const BannerCover = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 65vw;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+`;
+
 const BackgroundImage = styled.img`
   width: 100%;
 `;
@@ -66,10 +80,8 @@ const HeroContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 15px;
-  width: 80vw;
-  max-width: 1200px;
   position: relative;
+  margin: 40vh auto 0 auto;
 `;
 
 function Heros({
@@ -111,8 +123,9 @@ function Heros({
   }, [heroId, fetchHeroProfile]);
 
   return (
-    <>
+    <PageContainer>
       <Banner>
+        <BannerCover />
         <BackgroundImage src={herosBackground} alt="herosBackground" />
       </Banner>
       <HeroContainer>
@@ -120,7 +133,7 @@ function Heros({
         <MemoizedHerosList herosDataList={herosDataList} />
         {heroId ? <HeroAbility heroId={heroId} abilityValues={heroAbility} editHeroProfile={editHeroProfile} /> : null}
       </HeroContainer>
-    </>
+    </PageContainer>
   );
 }
 

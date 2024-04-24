@@ -17,7 +17,6 @@ const HeroCardContainer = styled.div<HeroCardContainerProps>`
   cursor: pointer;
   overflow: hidden;
   background-color: ${(props) => (props.selected ? 'tranparent' : props.theme.colors.black)};
-  // add border surround animation when selected is true
   // border: ${(props) => (props.selected ? '2px solid #f00' : 'none')};
   transition: border 0.5s;
   z-index: 1;

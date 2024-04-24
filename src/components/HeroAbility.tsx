@@ -7,10 +7,15 @@ const HeroAbilityContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: ${(props) => `1px solid ${props.theme.colors.grey}`};
   border-radius: 15px;
   width: 100%;
   z-index: 2;
+  margin: 30px 0px 0px 0px;
+
+  // 透明的背景
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+
   @media (max-width: ${(props) => props.theme.devicesWidth.mobile}) {
     flex-direction: column;
   }

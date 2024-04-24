@@ -9,7 +9,6 @@ const HeroListContainer = styled.div`
   justify-content: center;
   background-color: transparent;
   flex-wrap: wrap;
-  border: ${(props) => `1px solid ${props.theme.colors.grey}`};
   width: 100%;
 `;
 
