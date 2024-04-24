@@ -12,7 +12,7 @@
 執行以下的指令，即可在本地端啟動專案
 
 ```bash
-npm install & npm run start
+npm install & npm run dev
 ```
 
 執行完畢後，即可在瀏覽器中輸入 `http://localhost:3000` 進行瀏覽
@@ -72,6 +72,14 @@ npm run build
 
   - 用來處理 api 的 request，可以透過 axios 的 api 來發送 request，並處理 response
 
+- dotenv:
+
+  - 用來處理環境變數的 library，可以透過 dotenv 來設定環境變數，並在程式中使用
+
+- eslint:
+
+  - 用來檢查程式碼的規範，可以透過 eslint 來檢查程式碼的規範，包含縮排、命名規則以及 typescript 的規範
+
 - cz-conventional-changelog:
   - 用來規範 commit message 的格式，能更詳細的描述 commit 的內容
 
@@ -117,6 +125,8 @@ npm run build
    ```typescript
    <Button color="red">Click me</Button>
    ```
+
+3. 在使用 dotenv 時在環境變數檔案設定 API domain 沒效果，最後發現是因為環境變數的名稱沒有以 `REACT_APP` 作為前綴，參考此[文件](https://pjchender.dev/react-bootcamp/docs/bootcamp/week4/create-react-app-setting/)
 
 # Source
 
