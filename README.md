@@ -1,13 +1,19 @@
 # Demo
 
 1. 透過 github + vercel 的自動部署，可以透過以下的連結進行瀏覽
-   [Link](https://heros-app-pink.vercel.app/heros/4)
+   [Link](https://heros-app-pink.vercel.app/heros)
 
 2. 此專案有基本的 RWD，可以透過手機瀏覽器進行瀏覽
 
 # 我們該如何執行完成的 package
 
 ## Development
+
+產生一個 `.env.development` 的檔案，並在檔案中設定以下的環境變數
+
+```bash
+REACT_APP_API_URL="{API_DOMAIN}"
+```
 
 執行以下的指令，即可在本地端啟動專案
 
@@ -18,6 +24,12 @@ npm install & npm run dev
 執行完畢後，即可在瀏覽器中輸入 `http://localhost:3000` 進行瀏覽
 
 ## Production
+
+產生一個 `.env.production` 的檔案，並在檔案中設定以下的環境變數
+
+```bash
+REACT_APP_API_URL="{API_DOMAIN}"
+```
 
 執行以下的指令，即可將專案進行打包，並在根目錄下產生 `build` 資料夾，最後即可將該資料夾部署至網頁伺服器
 
@@ -127,6 +139,8 @@ npm run build
    ```
 
 3. 在使用 dotenv 時在環境變數檔案設定 API domain 沒效果，最後發現是因為環境變數的名稱沒有以 `REACT_APP` 作為前綴，參考此[文件](https://pjchender.dev/react-bootcamp/docs/bootcamp/week4/create-react-app-setting/)
+
+4. vercel 在部署時，因為沒有設定環境變數，所以在部署時會出現錯誤打不了 API 的問題，最後透過 vercel 的環境變數設定並且重新部署，即可解決此問題
 
 # Source
 
