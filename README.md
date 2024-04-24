@@ -96,7 +96,7 @@ npm run build
    </Routes>
    ```
 
-2. 第一次使用 styled-components + typescript 但不確認要如何設定型別
+2. 第一次嘗試使用 styled-components + typescript 的組合但不確認要如何設定型別
 
    - 解法就是若要設定 props 的型別，可以在 styled-component 後面加上 `<IButtonProps>` 來設定 props 的型別
 
@@ -117,3 +117,8 @@ npm run build
    ```typescript
    <Button color="red">Click me</Button>
    ```
+
+# Source
+
+1. 產生文字：[fontmeme](https://fontmeme.com/netflix-font/#textstyle)
+2. 背景圖片來源：[pxfuel](https://www.pxfuel.com/en/desktop-wallpaper-hserp)
