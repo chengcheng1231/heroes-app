@@ -9,11 +9,10 @@ const HeroAbilityContainer = styled.div`
   justify-content: space-between;
   border-radius: 15px;
   max-width: 1000px;
-  width: 100%;
+  width: 90%;
   z-index: 2;
   margin: 30px 0px 0px 0px;
 
-  // 透明的背景
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(1px);
 

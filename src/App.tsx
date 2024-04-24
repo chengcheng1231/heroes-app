@@ -30,7 +30,16 @@ const BackGroundContainer = styled.div`
   width: 70vw;
   max-width: 1400px;
   margin: 0 auto;
+
   background-color: ${(props) => `${props.theme.colors.black}`};
+
+  @media (max-width: ${(props) => props.theme.devicesWidth.tablet}) {
+    width: 80vw;
+  }
+
+  @media (max-width: ${(props) => props.theme.devicesWidth.mobile}) {
+    width: 100vw;
+  }
 `;
 
 function App() {
