@@ -25,7 +25,7 @@ export function* fetchHerosListSaga() {
 }
 
 export function* fetchHeroProfileSaga(action: IAction) {
-  const { heroId } = action.payload;
+  const { heroId } = action.payload as { heroId: string };
   const { response, error } = yield apiClient.get(`https://hahow-recruit.herokuapp.com/heroes/${heroId}/profile`);
   if (response) {
     yield put({ type: FETCH_HERO_PROFILE_SUCCESS, payload: response });
@@ -37,7 +37,10 @@ export function* fetchHeroProfileSaga(action: IAction) {
 }
 
 export function* editHeroProfileSaga(action: IAction) {
-  const { heroId, heroProfile } = action.payload;
+  const { heroId, heroProfile } = action.payload as {
+    heroId: string;
+    heroProfile: { str: number; int: number; agi: number; luk: number };
+  };
   const { response, error } = yield apiClient.patch(`https://hahow-recruit.herokuapp.com/heroes/${heroId}/profile`, {
     data: heroProfile,
   });

@@ -10,14 +10,17 @@ const apiClient = (() => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const errHandling = function (error: any) {
     return { error: error };
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const resHandling = (response: any) => ({ response: response.data });
 
   return {
-    get: (url: string, params?: any) => client.get(url, params).then(resHandling).catch(errHandling),
+    get: (url: string) => client.get(url).then(resHandling).catch(errHandling),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     patch: (url: string, params: any) => client.patch(url, params.data, params).then(resHandling).catch(errHandling),
   };
 })();
