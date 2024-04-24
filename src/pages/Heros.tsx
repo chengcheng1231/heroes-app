@@ -9,7 +9,7 @@ import { getPathAfterPrefix } from '../shared/utils';
 import herosBackground from '../static/images/herosBackground.webp';
 import { heroAbilityType } from '../types/heros';
 
-type dispatchType = (action: { type: string; payload?: any }) => void;
+type dispatchType = (action: { type: string; payload?: { heroId?: string; heroProfile?: heroAbilityType } }) => void;
 
 const MemoizedHerosList = memo(
   ({
@@ -141,7 +141,17 @@ function Heros({
   );
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: {
+  heros: {
+    herosDataList: {
+      id: string;
+      name: string;
+      image: string;
+    }[];
+    heroAbility: heroAbilityType;
+    loading: boolean;
+  };
+}) => ({
   herosDataList: state.heros.herosDataList,
   heroAbility: state.heros.heroAbility,
   loading: state.heros.loading,
