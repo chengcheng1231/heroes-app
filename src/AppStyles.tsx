@@ -2,16 +2,22 @@ import styled from 'styled-components';
 
 const Header = styled.header`
   position: fixed;
+  top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  z-index: 5;
   width: 100%;
-  z-index: 2;
+  height: 50px;
+  padding: 10px 0px;
+
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0) 100%);
 `;
 
-const HeaderImage = styled.img`
-  width: 100px;
-  margin: 20px 0;
+const HeaderImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const BackGroundContainer = styled.div`
@@ -33,4 +39,4 @@ const BackGroundContainer = styled.div`
   }
 `;
 
-export { BackGroundContainer, Header, HeaderImage };
+export { BackGroundContainer, Header, HeaderImageContainer };
