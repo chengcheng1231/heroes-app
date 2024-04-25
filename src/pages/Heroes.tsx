@@ -14,6 +14,8 @@ type dispatchType = (action: { type: string; payload?: { heroId?: string; heroPr
 const PageContainer = styled.div`
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const Banner = styled.div`
@@ -71,6 +73,36 @@ const HeroContainer = styled.div`
   }
 `;
 
+const ErrorComponent = styled.div`
+  position: fixed;
+  top: 80px;
+  height: auto;
+  color: ${(props) => props.theme.colors.red};
+  font-size: ${(props) => props.theme.fontSizes.small};
+  font-weight: 700;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+  padding: 10px;
+  z-index: 3;
+  text-align: center;
+
+  // from top to bottom
+  animation: fadeIn 0.5s ease-in-out;
+  @keyframes fadeIn {
+    0% {
+      top: -100px;
+    }
+    100% {
+      top: 80px;
+    }
+  }
+
+  > p {
+    margin: 0px;
+  }
+`;
+
 function Heros({
   loading,
   heroesDataList,
@@ -78,6 +110,8 @@ function Heros({
   fetchHerosList,
   fetchHeroProfile,
   editHeroProfile,
+  clearError,
+  error,
 }: {
   loading: boolean;
   heroesDataList: {
@@ -85,6 +119,8 @@ function Heros({
     name: string;
     image: string;
   }[];
+  clearError: () => void;
+  error: string | null;
   heroAbility: heroAbilityType;
   fetchHerosList: () => void;
   fetchHeroProfile: (heroId: string) => void;
@@ -118,12 +154,27 @@ function Heros({
     }
   }, [heroId, fetchHeroProfile]);
 
+  // fade out error component after 3 seconds
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        clearError();
+      }, 5000);
+    }
+  }, [error, clearError]);
+
   return (
     <PageContainer>
       <Banner>
         <BannerCover />
         <BackgroundImage src={heroesBackground} alt="heroesBackground" />
       </Banner>
+      {error ? (
+        <ErrorComponent>
+          {' '}
+          <p>{error}</p>
+        </ErrorComponent>
+      ) : null}
       <HeroContainer>
         {loading ? <LoadingOverlay /> : null}
         <HeroesList heroesDataList={heroesDataList} />
@@ -142,11 +193,13 @@ const mapStateToProps = (state: {
     }[];
     heroAbility: heroAbilityType;
     loading: boolean;
+    error: string | null;
   };
 }) => ({
   heroesDataList: state.heroes.heroesDataList,
   heroAbility: state.heroes.heroAbility,
   loading: state.heroes.loading,
+  error: state.heroes.error,
 });
 
 const mapDispatchToProps = (dispatch: dispatchType) => {
@@ -166,6 +219,11 @@ const mapDispatchToProps = (dispatch: dispatchType) => {
       dispatch({
         type: 'EDIT/HERO_PROFILE',
         payload: { heroId, heroProfile },
+      });
+    },
+    clearError: () => {
+      dispatch({
+        type: 'CLEAR/HEROES/ERROR',
       });
     },
   };

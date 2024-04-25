@@ -1,5 +1,6 @@
 import { IAction } from '../actionTypes';
 import {
+  CLEAR_HEROES_ERROR,
   EDIT_HERO_PROFILE,
   EDIT_HERO_PROFILE_ERROR,
   EDIT_HERO_PROFILE_SUCCESS,
@@ -67,7 +68,12 @@ export function heroesReducer(state = initialState, action: IAction = { type: ''
       return {
         ...state,
         loading: false,
-        error: action.payload,
+        error: 'An error occurred while interacting with the server, please try again later.',
+      };
+    case CLEAR_HEROES_ERROR:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;
