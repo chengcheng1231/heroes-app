@@ -50,7 +50,7 @@ const HeroAbility = ({
     setRemainingPoints(changingRemainingPoints);
   };
 
-  // edit hero profile
+  // edit hero profile before making sure remaining points is 0
   const handleSave = () => {
     if (remainingPoints > 0) {
       setAlert('請分配完剩餘點數');

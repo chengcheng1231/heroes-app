@@ -1,9 +1,8 @@
 # Demo
 
-1. 透過 github + vercel 的自動部署，可以透過以下的連結進行瀏覽
-   [Link](https://heros-app-pink.vercel.app/heroes)
+1. 透過 github + vercel 的自動部署，可以用此[連結](https://heros-app-pink.vercel.app/heroes)進行瀏覽
 
-2. 此專案有基本的 RWD，可以透過手機瀏覽器進行瀏覽
+2. 此專案有基本的 RWD，可以透過手機瀏覽器進行瀏覽操作
 
 3. 基本的錯誤處理，若 API request 失敗，會顯示錯誤訊息
 
@@ -33,7 +32,7 @@ npm install & npm run dev
 REACT_APP_API_URL="{API_DOMAIN}"
 ```
 
-執行以下的指令，即可將專案進行打包，並在根目錄下產生 `build` 資料夾，最後即可將該資料夾部署至網頁伺服器
+執行以下的指令，即可將專案進行打包，並在根目錄下產生 `build` 資料夾，最後即可將該資料夾部署至 server
 
 ```bash
 npm run build
@@ -52,12 +51,12 @@ npm run build
 │   ├── actionTypes.ts          # 定義所有的 action types
 │   ├── rootReducers.ts         # 將所有的 reducers 合併成一個
 │   ├── rootSagas.ts            # 將所有的 sagas 合併成一個
-├── shared                      # 一些共用的 function
+├── shared                      # 存放共用的設定
 │   ├── api.config.ts           # 定義 api 的基本設定，包括 api 的 base url
 │   ├── utils.ts                # 一些共用的 function
 ├── static                      # 放靜態資源的地方，包含 images、全域的 color 以及 RWD 的 media query
 ├── types                       # 個別的型別定義
-├── App.tsx                     # 主要的 App component，包含 router 的設定
+├── App.tsx                     # 主要的 App component，包含 dom router 的設定
 ├── index.tsx                   # 進入點
 ├── README.md                   # 此 README
 └── package.json                # 這個 package 的相依套件、各種 scripts 等等
@@ -67,7 +66,7 @@ npm run build
 
 - styled-components:
 
-  - 用來處理 css in js 的 library，可以透過 styled-components 來寫 css，並透過 props 來動態的改變 css 的樣式
+  - 用來處理 css in js 的 library，可以透過 styled-components 來寫 css，也可透過 props template string 來設定 css 的樣式
 
 - redux:
 
@@ -80,11 +79,11 @@ npm run build
 
 - react-router-dom:
 
-  - 用來處理 react 的 router，可以透過 react-router-dom 來設定 router，並透過 Route、Link 等等來設定 router 的路徑
+  - 用來處理 react 的 router，可以透過 react-router-dom 來設定 router，並透過 Routes、Route 等等來設定 router 的路徑，透過 Navigate 來導向路徑
 
 - axios:
 
-  - 用來處理 api 的 request，可以透過 axios 的 api 來發送 request，並處理 response
+  - 用來處理 api 的 request，可以透過 axios 的 api 來發送 request，並處理 response，是以 Promise 為基礎的 library
 
 - dotenv:
 
@@ -148,5 +147,5 @@ npm run build
 
 # Source
 
-1. 產生文字：[fontmeme](https://fontmeme.com/netflix-font/#textstyle)
+1. 產生文字 LOGO：[fontmeme](https://fontmeme.com/netflix-font/#textstyle)
 2. 背景圖片來源：[pxfuel](https://www.pxfuel.com/en/desktop-wallpaper-hserp)

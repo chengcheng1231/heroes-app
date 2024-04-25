@@ -80,7 +80,7 @@ function Heros({
       {error ? <ErrorContainer message={error} /> : null}
       <HeroContainer>
         {loading ? <LoadingOverlay /> : null}
-        <HeroesList heroesDataList={heroesDataList} />
+        <HeroesList heroesDataList={heroesDataList} prefix={prefix} />
         {heroId ? <HeroAbility heroId={heroId} abilityValues={heroAbility} editHeroProfile={editHeroProfile} /> : null}
       </HeroContainer>
     </PageContainer>

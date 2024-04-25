@@ -5,6 +5,7 @@ import { HeroAvatar, HeroAvatarContainer, HeroCardContainer, HeroInfo, HeroName 
 const HeroCard = ({
   hero,
   selected,
+  prefix,
 }: {
   hero: {
     id: string;
@@ -12,11 +13,12 @@ const HeroCard = ({
     image: string;
   };
   selected: boolean;
+  prefix: string;
 }) => {
   const [onHover, setOnHover] = useState(false);
   const navigate = useNavigate();
   const handleClick = (heroId: string) => {
-    navigate(`/heroes/${heroId}`);
+    navigate(`${prefix}/${heroId}`);
   };
 
   return (
