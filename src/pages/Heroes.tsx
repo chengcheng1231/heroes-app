@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HeroAbility from '../components/HeroAbility';
 import HeroesList from '../components/HeroesList';
+import ErrorContainer from '../elements/ErrorContainer';
 import LoadingOverlay from '../elements/LoadingOverlay';
 import { getPathAfterPrefix } from '../shared/utils';
 import heroesBackground from '../static/images/heroesBackground.webp';
@@ -73,36 +74,6 @@ const HeroContainer = styled.div`
   }
 `;
 
-const ErrorComponent = styled.div`
-  position: fixed;
-  top: 80px;
-  height: auto;
-  color: ${(props) => props.theme.colors.red};
-  font-size: ${(props) => props.theme.fontSizes.small};
-  font-weight: 700;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(1px);
-  padding: 10px;
-  z-index: 3;
-  text-align: center;
-
-  // from top to bottom
-  animation: fadeIn 0.5s ease-in-out;
-  @keyframes fadeIn {
-    0% {
-      top: -100px;
-    }
-    100% {
-      top: 80px;
-    }
-  }
-
-  > p {
-    margin: 0px;
-  }
-`;
-
 function Heros({
   loading,
   heroesDataList,
@@ -169,12 +140,7 @@ function Heros({
         <BannerCover />
         <BackgroundImage src={heroesBackground} alt="heroesBackground" />
       </Banner>
-      {error ? (
-        <ErrorComponent>
-          {' '}
-          <p>{error}</p>
-        </ErrorComponent>
-      ) : null}
+      {error ? <ErrorContainer message={error} /> : null}
       <HeroContainer>
         {loading ? <LoadingOverlay /> : null}
         <HeroesList heroesDataList={heroesDataList} />

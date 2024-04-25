@@ -9,7 +9,7 @@ const HeroAbilityContainer = styled.div`
   justify-content: space-between;
   border-radius: 15px;
   max-width: 1000px;
-  width: 90%;
+  width: 100%;
   z-index: 2;
   margin: 30px 0px 0px 0px;
 
@@ -18,6 +18,7 @@ const HeroAbilityContainer = styled.div`
 
   @media (max-width: ${(props) => props.theme.devicesWidth.mobile}) {
     flex-direction: column;
+    width: 90%;
   }
 `;
 

@@ -5,6 +5,8 @@
 
 2. 此專案有基本的 RWD，可以透過手機瀏覽器進行瀏覽
 
+3. 基本的錯誤處理，若 API request 失敗，會顯示錯誤訊息
+
 # 我們該如何執行完成的 package
 
 ## Development
@@ -99,7 +101,7 @@ npm run build
 
 1. 在 utils 或是 shared 的 function 中，會寫註解來描述 function 的功能
 2. 在頁面中，會寫註解來描述 useEffect 的目的，或是轉換資料再 render 的目的
-3. 使用 react memo 來優化 component 的原因，會寫註解來描述為什麼要使用 memo
+3. 描述 styled-components 的動畫效果
 
 # 在這份專案中你遇到的困難、問題，以及解決的方法
 

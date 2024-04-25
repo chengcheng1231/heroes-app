@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import './App.css';
 import Heroes from './pages/Heroes';
 import store from './redux/store';
 import heroesImage from './static/images/heroes.webp';

@@ -7,7 +7,6 @@ import {
   EDIT_HERO_PROFILE_SUCCESS,
   FETCH_HEROES_LIST,
   FETCH_HEROES_LIST_ERROR,
-  FETCH_HEROES_LIST_SUCCESS,
   FETCH_HERO_PROFILE,
   FETCH_HERO_PROFILE_ERROR,
   FETCH_HERO_PROFILE_SUCCESS,
@@ -15,11 +14,11 @@ import {
 
 export function* fetchHeroesListSaga() {
   const { response, error } = yield apiClient.get('');
-  if (response) {
-    yield put({ type: FETCH_HEROES_LIST_SUCCESS, payload: response });
-  }
+  // if (response) {
+  //   yield put({ type: FETCH_HEROES_LIST_SUCCESS, payload: response });
+  // }
 
-  if (error) {
+  if (true) {
     yield put({ type: FETCH_HEROES_LIST_ERROR, payload: error });
   }
 }

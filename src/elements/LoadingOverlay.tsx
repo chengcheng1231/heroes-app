@@ -21,6 +21,7 @@ const LoadingSpinner = styled.div`
   height: 30px;
   animation: spin 2s linear infinite;
 
+  // make a spinner animation
   @keyframes spin {
     0% {
       transform: rotate(0deg);
