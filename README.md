@@ -105,14 +105,14 @@ npm run build
 
 1. React-router-dom 如何設定初始路徑
 
-   - 在 App.tsx 中設定路徑時在猶豫是否要分兩個路徑 /heros 和 /heros/:heroId，最後考慮到不重新渲染 Hero List，所以最後選擇只設定 `/heros/:heroId` 的路徑，並透過 location.pathname 來判斷 `/heros/:heroId` 的 heroId 是什麼，若存在則顯示 Hero detailed 的能力值
-   - 並在 `/` 的路徑透過 `<Navigate to="/heros/:heroId" />` 來讓使用者導向 `/heros/:heroId`
+   - 在 App.tsx 中設定路徑時在猶豫是否要分兩個路徑 /heroes 和 /heroes/:heroId，最後考慮到不重新渲染 Hero List，所以最後選擇只設定 `/heroes/:heroId` 的路徑，並透過 location.pathname 來判斷 `/heroes/:heroId` 的 heroId 是什麼，若存在則顯示 Hero detailed 的能力值
+   - 並在 `/` 的路徑透過 `<Navigate to="/heroes/:heroId" />` 來讓使用者導向 `/heroes/:heroId`
 
    ```typescript
    // --- other code ---
    <Routes>
-     <Route path="/" element={<Navigate to="/heros/:heroId" />} />
-     <Route path="/heros/:heroId" element={<Herors />} />
+     <Route path="/" element={<Navigate to="/heroes/:heroId" />} />
+     <Route path="/heroes/:heroId" element={<Herors />} />
    </Routes>
    ```
 

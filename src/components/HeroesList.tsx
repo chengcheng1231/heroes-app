@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HeroCard from './HeroCard';
 
-const HeroListContainer = styled.div`
+const HeroesListContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,10 +12,10 @@ const HeroListContainer = styled.div`
   width: 100%;
 `;
 
-const HeroList = ({
-  herosDataList,
+const HeroesList = ({
+  heroesDataList,
 }: {
-  herosDataList: {
+  heroesDataList: {
     id: string;
     name: string;
     image: string;
@@ -24,12 +24,12 @@ const HeroList = ({
   const location = useLocation();
   const heroId = location.pathname.split('/').pop();
   return (
-    <HeroListContainer>
-      {herosDataList.map((hero) => (
+    <HeroesListContainer>
+      {heroesDataList.map((hero) => (
         <HeroCard key={hero.id} hero={hero} selected={hero.id === heroId} />
       ))}
-    </HeroListContainer>
+    </HeroesListContainer>
   );
 };
 
-export default HeroList;
+export default HeroesList;

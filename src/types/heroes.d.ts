@@ -1,4 +1,4 @@
-// This file contains all the types related to the heros page.
+// This file contains all the types related to the heroes page.
 
 type heroAbilityType = {
   str: number;

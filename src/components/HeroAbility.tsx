@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../elements/Button';
-import { heroAbilityType } from '../types/heros';
+import { heroAbilityType } from '../types/heroes';
 
 const HeroAbilityContainer = styled.div`
   display: flex;

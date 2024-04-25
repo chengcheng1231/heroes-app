@@ -95,7 +95,7 @@ const HeroCard = ({
   const [onHover, setOnHover] = useState(false);
   const navigate = useNavigate();
   const handleClick = (heroId: string) => {
-    navigate(`/heros/${heroId}`);
+    navigate(`/heroes/${heroId}`);
   };
 
   return (
