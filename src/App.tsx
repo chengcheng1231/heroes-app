@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { BackGroundContainer, Header, HeaderImage } from './AppStyles';
+import { BackGroundContainer, Header, HeaderImageContainer } from './AppStyles';
 import Heroes from './pages/Heroes';
 import store from './redux/store';
 import heroesImage from './static/images/heroes.webp';
@@ -13,7 +13,9 @@ function App() {
     <Provider store={store}>
       <Theme>
         <Header>
-          <HeaderImage src={heroesImage} alt="logo" width={100} />
+          <HeaderImageContainer>
+            <img src={heroesImage} alt="logo" width="100px" />
+          </HeaderImageContainer>
         </Header>
         <BackGroundContainer>
           <BrowserRouter>
