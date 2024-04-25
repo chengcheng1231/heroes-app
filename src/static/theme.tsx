@@ -5,6 +5,9 @@ const theme = {
     darkGrey: '#A9A9A9',
     white: '#ffffff',
     red: '#D40D1F',
+    yellow: '#ffbe44',
+    blue: '#5dade2',
+    green: '#2ecc71',
   },
   fonts: 'monospace',
   fontSizes: {
