@@ -5,22 +5,22 @@ import {
   EDIT_HERO_PROFILE,
   EDIT_HERO_PROFILE_ERROR,
   EDIT_HERO_PROFILE_SUCCESS,
-  FETCH_HEROS_LIST,
-  FETCH_HEROS_LIST_ERROR,
-  FETCH_HEROS_LIST_SUCCESS,
+  FETCH_HEROES_LIST,
+  FETCH_HEROES_LIST_ERROR,
+  FETCH_HEROES_LIST_SUCCESS,
   FETCH_HERO_PROFILE,
   FETCH_HERO_PROFILE_ERROR,
   FETCH_HERO_PROFILE_SUCCESS,
-} from '../actions/heros';
+} from '../actions/heroes';
 
-export function* fetchHerosListSaga() {
+export function* fetchHeroesListSaga() {
   const { response, error } = yield apiClient.get('');
   if (response) {
-    yield put({ type: FETCH_HEROS_LIST_SUCCESS, payload: response });
+    yield put({ type: FETCH_HEROES_LIST_SUCCESS, payload: response });
   }
 
   if (error) {
-    yield put({ type: FETCH_HEROS_LIST_ERROR, payload: error });
+    yield put({ type: FETCH_HEROES_LIST_ERROR, payload: error });
   }
 }
 
@@ -61,9 +61,9 @@ export function* editHeroProfileSaga(action: IAction) {
   }
 }
 
-export function* herosSaga() {
+export function* heroesSaga() {
   yield all([
-    takeLatest(FETCH_HEROS_LIST, fetchHerosListSaga),
+    takeLatest(FETCH_HEROES_LIST, fetchHeroesListSaga),
     takeLatest(FETCH_HERO_PROFILE, fetchHeroProfileSaga),
     takeLatest(EDIT_HERO_PROFILE, editHeroProfileSaga),
   ]);

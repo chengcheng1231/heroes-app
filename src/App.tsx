@@ -2,9 +2,9 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import './App.css';
-import Heros from './pages/Heros';
+import Heroes from './pages/Heroes';
 import store from './redux/store';
-import herosImage from './static/images/header.webp';
+import heroesImage from './static/images/heroes.webp';
 import theme from './static/theme';
 
 const Theme = ({ children }: { children: React.ReactNode }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
@@ -47,13 +47,13 @@ function App() {
     <Provider store={store}>
       <Theme>
         <Header>
-          <HeaderImage src={herosImage} alt="logo" width={100} />
+          <HeaderImage src={heroesImage} alt="logo" width={100} />
         </Header>
         <BackGroundContainer>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Navigate to="/heros" />} /> {/* Redirect to /heros when the app starts */}
-              <Route path="/heros/*" element={<Heros />} />
+              <Route path="/" element={<Navigate to="/heroes" />} /> {/* Redirect to /heroes when the app starts */}
+              <Route path="/heroes/*" element={<Heroes />} />
             </Routes>
           </BrowserRouter>
         </BackGroundContainer>

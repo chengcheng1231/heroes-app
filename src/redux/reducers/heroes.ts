@@ -3,19 +3,19 @@ import {
   EDIT_HERO_PROFILE,
   EDIT_HERO_PROFILE_ERROR,
   EDIT_HERO_PROFILE_SUCCESS,
-  FETCH_HEROS_LIST,
-  FETCH_HEROS_LIST_ERROR,
-  FETCH_HEROS_LIST_SUCCESS,
+  FETCH_HEROES_LIST,
+  FETCH_HEROES_LIST_ERROR,
+  FETCH_HEROES_LIST_SUCCESS,
   FETCH_HERO_PROFILE,
   FETCH_HERO_PROFILE_ERROR,
   FETCH_HERO_PROFILE_SUCCESS,
-} from '../actions/heros';
+} from '../actions/heroes';
 
 const initialState = {
   loading: false,
   data: [],
   error: null,
-  herosDataList: [],
+  heroesDataList: [],
   heroAbility: {},
 };
 
@@ -23,8 +23,8 @@ function getKey(actionKey: string) {
   let key = '';
 
   switch (actionKey) {
-    case 'HEROS_LIST':
-      key = 'herosDataList';
+    case 'HEROES_LIST':
+      key = 'heroesDataList';
       break;
     case 'HERO_PROFILE':
       key = 'heroAbility';
@@ -36,12 +36,12 @@ function getKey(actionKey: string) {
   return key;
 }
 
-export function herosReducer(state = initialState, action: IAction = { type: '' }) {
+export function heroesReducer(state = initialState, action: IAction = { type: '' }) {
   const actionKey = action.type.substring(action.type.indexOf('/') + 1, action.type.lastIndexOf('/'));
   const key = getKey(actionKey);
 
   switch (action.type) {
-    case FETCH_HEROS_LIST:
+    case FETCH_HEROES_LIST:
     case FETCH_HERO_PROFILE:
     case EDIT_HERO_PROFILE:
       return {
@@ -50,7 +50,7 @@ export function herosReducer(state = initialState, action: IAction = { type: '' 
         error: null,
       };
     case FETCH_HERO_PROFILE_SUCCESS:
-    case FETCH_HEROS_LIST_SUCCESS:
+    case FETCH_HEROES_LIST_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -61,7 +61,7 @@ export function herosReducer(state = initialState, action: IAction = { type: '' 
         ...state,
         loading: false,
       };
-    case FETCH_HEROS_LIST_ERROR:
+    case FETCH_HEROES_LIST_ERROR:
     case FETCH_HERO_PROFILE_ERROR:
     case EDIT_HERO_PROFILE_ERROR:
       return {

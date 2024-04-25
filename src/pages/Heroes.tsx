@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HeroAbility from '../components/HeroAbility';
-import HeroList from '../components/HeroList';
+import HeroesList from '../components/HeroesList';
 import LoadingOverlay from '../elements/LoadingOverlay';
 import { getPathAfterPrefix } from '../shared/utils';
-import herosBackground from '../static/images/herosBackground.webp';
-import { heroAbilityType } from '../types/heros';
+import heroesBackground from '../static/images/heroesBackground.webp';
+import { heroAbilityType } from '../types/heroes';
 
 type dispatchType = (action: { type: string; payload?: { heroId?: string; heroProfile?: heroAbilityType } }) => void;
 
@@ -73,14 +73,14 @@ const HeroContainer = styled.div`
 
 function Heros({
   loading,
-  herosDataList,
+  heroesDataList,
   heroAbility,
   fetchHerosList,
   fetchHeroProfile,
   editHeroProfile,
 }: {
   loading: boolean;
-  herosDataList: {
+  heroesDataList: {
     id: string;
     name: string;
     image: string;
@@ -90,10 +90,10 @@ function Heros({
   fetchHeroProfile: (heroId: string) => void;
   editHeroProfile: (heroId: string, heroProfile: heroAbilityType) => void;
 }) {
-  // get heroId from location /heros/:heroId
+  // get heroId from location /heroes/:heroId
   // Start
   const location = useLocation();
-  const prefix = '/heros';
+  const prefix = '/heroes';
   const heroId = getPathAfterPrefix(location.pathname, prefix);
   // End
 
@@ -106,7 +106,7 @@ function Heros({
     }
   }, [heroId]);
 
-  // fetch heros list when component is mounted
+  // fetch heroes list when component is mounted
   useEffect(() => {
     fetchHerosList();
   }, [fetchHerosList]);
@@ -122,11 +122,11 @@ function Heros({
     <PageContainer>
       <Banner>
         <BannerCover />
-        <BackgroundImage src={herosBackground} alt="herosBackground" />
+        <BackgroundImage src={heroesBackground} alt="heroesBackground" />
       </Banner>
       <HeroContainer>
         {loading ? <LoadingOverlay /> : null}
-        <HeroList herosDataList={herosDataList} />
+        <HeroesList heroesDataList={heroesDataList} />
         {heroId ? <HeroAbility heroId={heroId} abilityValues={heroAbility} editHeroProfile={editHeroProfile} /> : null}
       </HeroContainer>
     </PageContainer>
@@ -134,8 +134,8 @@ function Heros({
 }
 
 const mapStateToProps = (state: {
-  heros: {
-    herosDataList: {
+  heroes: {
+    heroesDataList: {
       id: string;
       name: string;
       image: string;
@@ -144,16 +144,16 @@ const mapStateToProps = (state: {
     loading: boolean;
   };
 }) => ({
-  herosDataList: state.heros.herosDataList,
-  heroAbility: state.heros.heroAbility,
-  loading: state.heros.loading,
+  heroesDataList: state.heroes.heroesDataList,
+  heroAbility: state.heroes.heroAbility,
+  loading: state.heroes.loading,
 });
 
 const mapDispatchToProps = (dispatch: dispatchType) => {
   return {
     fetchHerosList: () => {
       dispatch({
-        type: 'FETCH/HEROS_LIST',
+        type: 'FETCH/HEROES_LIST',
       });
     },
     fetchHeroProfile: (heroId: string) => {
