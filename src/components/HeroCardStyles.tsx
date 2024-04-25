@@ -1,35 +1,18 @@
 import styled from 'styled-components';
 
-interface HeroCardContainerProps {
-  selected: boolean;
-}
-
-const HeroCardContainer = styled.div<HeroCardContainerProps>`
+const HeroCardContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 250px;
   border-radius: 15px;
-  box-shadow: ${(props) => (props.selected ? 'none' : `0px 2px 2px 0px ${props.theme.colors.grey}`)};
+  box-shadow: ${(props) => `0px 2px 2px 0px ${props.theme.colors.grey}`};
   cursor: pointer;
   overflow: hidden;
-
   transition: border 0.5s;
   z-index: 1;
-
   transition: transform 0.5s;
-  transform: ${(props) => props.selected && 'scale(1.05)'};
-
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: ${(props) => props.theme.colors.black};
-    z-index: 1;
-    opacity: ${(props) => (props.selected ? 0 : 0.3)};
-  }
 `;
 
 const HeroAvatarContainer = styled.div`
@@ -37,6 +20,7 @@ const HeroAvatarContainer = styled.div`
   width: 100%;
   height: 200px;
   position: relative;
+  background-color: ${(props) => props.theme.colors.black};
 
   &:before {
     content: '';
@@ -50,10 +34,13 @@ const HeroAvatarContainer = styled.div`
   }
 `;
 
-const HeroAvatar = styled.img<{ $hover: boolean }>`
+const HeroAvatar = styled.img`
   z-index: 1;
   transition: transform 0.5s;
-  transform: ${(props) => props.$hover && 'scale(1.1)'};
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const HeroInfo = styled.div`
@@ -75,4 +62,18 @@ const HeroName = styled.p`
   z-index: 2;
 `;
 
-export { HeroAvatar, HeroAvatarContainer, HeroCardContainer, HeroInfo, HeroName };
+const HeroCardOuterContainer = styled.div<{ selected: boolean }>`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  border-radius: 15px;
+  z-index: 2;
+  margin: 12px;
+
+  transition: transform 0.5s;
+  transform: ${(props) => props.selected && 'scale(1.1)'};
+`;
+
+export { HeroAvatar, HeroAvatarContainer, HeroCardContainer, HeroInfo, HeroName, HeroCardOuterContainer };

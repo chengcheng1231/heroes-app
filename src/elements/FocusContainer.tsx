@@ -10,11 +10,12 @@ const rotate = keyframes`
 `;
 
 const BoxWrap = styled.div`
-  border-radius: 10px;
+  border-radius: 18px;
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  height: 100%;
+  width: 100%;
   padding: 4px;
-  margin: 4px;
 `;
 
 const BorderLayer = styled.div`
@@ -38,7 +39,6 @@ const BorderLayer = styled.div`
 const BoxContent = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
@@ -47,16 +47,13 @@ const BoxContent = styled.div`
 `;
 
 // Surround the children with a border and a rotating gradient
-const FocusContainer = ({ children, selected }: { children: React.ReactNode; selected?: boolean }) => {
-  if (selected) {
-    return (
-      <BoxWrap>
-        <BorderLayer />
-        <BoxContent>{children}</BoxContent>
-      </BoxWrap>
-    );
-  }
-  return <BoxWrap>{children}</BoxWrap>;
+const FocusContainer = () => {
+  return (
+    <BoxWrap>
+      <BorderLayer />
+      <BoxContent />
+    </BoxWrap>
+  );
 };
 
 export default FocusContainer;

@@ -122,10 +122,18 @@ npm run build
    - 解法就是若要設定 props 的型別，可以在 styled-component 後面加上型別，例如以下設定
 
    ```typescript
-   const HeroAvatar = styled.img<{ $hover: boolean }>`
-     z-index: 1;
+   const HeroCardOuterContainer = styled.div<{ selected: boolean }>`
+     position: relative;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 250px;
+     border-radius: 15px;
+     z-index: 2;
+     margin: 12px;
+
      transition: transform 0.5s;
-     transform: ${(props) => props.$hover && 'scale(1.1)'};
+     transform: ${(props) => props.selected && 'scale(1.1)'};
    `;
    ```
 

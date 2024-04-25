@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import HeroCard from './HeroCard';
+import { HeroCard, HeroCardOuter } from './HeroCard';
 import { HeroesListContainer } from './HeroesListStyles';
 
 const HeroesList = ({
@@ -18,7 +18,9 @@ const HeroesList = ({
   return (
     <HeroesListContainer>
       {heroesDataList.map((hero) => (
-        <HeroCard key={hero.id} hero={hero} selected={hero.id === heroId} prefix={prefix} />
+        <HeroCardOuter key={hero.id} selected={hero.id === heroId} hero={hero} prefix={prefix}>
+          <HeroCard hero={hero} />
+        </HeroCardOuter>
       ))}
     </HeroesListContainer>
   );
