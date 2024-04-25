@@ -144,6 +144,8 @@ npm run build
 
 4. vercel 在部署時，因為沒有設定環境變數，所以在部署時會出現錯誤打不了 API 的問題，最後透過 vercel 的環境變數設定並且重新部署，即可解決此問題
 
+5. 渲染 hero 圖片時若沒有對 img 做 Sizing hints 會出現 hero 外層的 div 先被壓縮，再放大的情況，對於使用者在互動上會產生不好的體驗，，最後透過 img tag 設定 width 和 height 來解決此問題
+
 # Source
 
 1. 產生文字：[fontmeme](https://fontmeme.com/netflix-font/#textstyle)

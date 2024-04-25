@@ -1,16 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
 import HeroCard from './HeroCard';
-
-const HeroesListContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  flex-wrap: wrap;
-  width: 100%;
-`;
+import { HeroesListContainer } from './HeroesListStyles';
 
 const HeroesList = ({
   heroesDataList,
