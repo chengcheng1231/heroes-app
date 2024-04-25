@@ -1,7 +1,7 @@
 # Demo
 
 1. 透過 github + vercel 的自動部署，可以透過以下的連結進行瀏覽
-   [Link](https://heros-app-pink.vercel.app/heros)
+   [Link](https://heros-app-pink.vercel.app/heroes)
 
 2. 此專案有基本的 RWD，可以透過手機瀏覽器進行瀏覽
 
