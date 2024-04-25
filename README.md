@@ -119,31 +119,27 @@ npm run build
 
 2. 第一次嘗試使用 styled-components + typescript 的組合但不確認要如何設定型別
 
-   - 解法就是若要設定 props 的型別，可以在 styled-component 後面加上 `<IButtonProps>` 來設定 props 的型別
+   - 解法就是若要設定 props 的型別，可以在 styled-component 後面加上型別，例如以下設定
 
    ```typescript
-   import { DefaultTheme } from 'styled-components';
-
-   interface IButtonProps {
-     color?: string;
-   }
-
-   const Button = styled.button<IButtonProps>`
-     color: ${(props) => props.color || props.theme.colors.primary};
+   const HeroAvatar = styled.img<{ $hover: boolean }>`
+     z-index: 1;
+     transition: transform 0.5s;
+     transform: ${(props) => props.$hover && 'scale(1.1)'};
    `;
    ```
 
-   使用時則可以透過 props 來傳遞 color 的值
+   - 使用時則可以透過 props 來傳遞，也可透過錢號來設定 props 的型別
 
    ```typescript
-   <Button color="red">Click me</Button>
+   <HeroAvatar src={heroImage} alt="hero" $hover={onHover} width={200} height={200} loading="lazy" />
    ```
 
 3. 在使用 dotenv 時在環境變數檔案設定 API domain 沒效果，最後發現是因為環境變數的名稱沒有以 `REACT_APP` 作為前綴，參考此[文件](https://pjchender.dev/react-bootcamp/docs/bootcamp/week4/create-react-app-setting/)
 
-4. vercel 在部署時，因為沒有設定環境變數，所以在部署時會出現錯誤打不了 API 的問題，最後透過 vercel 的環境變數設定並且重新部署，即可解決此問題
+4. vercel 在部署時，因為沒有設定環境變數，所以在部署時會出現錯誤打不了 API 的問題，最後透過 vercel 的平台去設定環境變數後再重新部署，即可解決此問題
 
-5. 渲染 hero 圖片時若沒有對 img 做 Sizing hints 會出現 hero 外層的 div 先被壓縮，再放大的情況，對於使用者在互動上會產生不好的體驗，，最後透過 img tag 設定 width 和 height 來解決此問題
+5. 渲染 hero 圖片時若沒有對 img 做 Sizing hints 會出現 hero 外層的 div 先被壓縮，再放大的情況，對於使用者在互動上會產生不好的體驗，，最後透過 img tag 設定 width 和 height 來解決此問題，用 memo 的方式來避免不必要的 re-render
 
 # Source
 
