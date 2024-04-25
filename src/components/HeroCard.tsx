@@ -9,6 +9,8 @@ const MemorizedHeroAvatarContainer = memo(({ heroImage, onHover }: { heroImage: 
   </HeroAvatarContainer>
 ));
 
+MemorizedHeroAvatarContainer.displayName = 'HeroAvatarContainer';
+
 const HeroCard = ({
   hero,
   selected,
