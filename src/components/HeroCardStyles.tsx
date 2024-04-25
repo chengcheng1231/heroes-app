@@ -11,16 +11,12 @@ const HeroCardContainer = styled.div<HeroCardContainerProps>`
   align-items: center;
   height: 250px;
   border-radius: 15px;
-  margin: 0 10px 0 10px;
   box-shadow: ${(props) => (props.selected ? 'none' : `0px 2px 2px 0px ${props.theme.colors.grey}`)};
   cursor: pointer;
   overflow: hidden;
-  background-color: ${(props) => (props.selected ? 'tranparent' : props.theme.colors.black)};
-  border: ${(props) => (props.selected ? `4px solid ${props.theme.colors.red}` : 'none')};
 
   transition: border 0.5s;
   z-index: 1;
-  margin: 0 10px 20px 10px;
 
   transition: transform 0.5s;
   transform: ${(props) => props.selected && 'scale(1.05)'};
@@ -45,7 +41,7 @@ const HeroAvatarContainer = styled.div`
   &:before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -1px;
     left: 0;
     width: 100%;
     height: 30px;

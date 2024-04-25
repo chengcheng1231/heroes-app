@@ -1,6 +1,13 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FocusContainer from '../elements/FocusContainer';
 import { HeroAvatar, HeroAvatarContainer, HeroCardContainer, HeroInfo, HeroName } from './HeroCardStyles';
+
+const MemorizedHeroAvatarContainer = memo(({ heroImage, onHover }: { heroImage: string; onHover: boolean }) => (
+  <HeroAvatarContainer>
+    <HeroAvatar src={heroImage} alt="hero" $hover={onHover} width={200} height={200} loading="lazy" />
+  </HeroAvatarContainer>
+));
 
 const HeroCard = ({
   hero,
@@ -22,19 +29,19 @@ const HeroCard = ({
   };
 
   return (
-    <HeroCardContainer
-      onClick={() => handleClick(hero.id)}
-      selected={selected}
-      onMouseEnter={() => setOnHover(true)}
-      onMouseLeave={() => setOnHover(false)}
-    >
-      <HeroAvatarContainer>
-        <HeroAvatar src={hero.image} alt="hero" $hover={onHover} width={200} height={200} loading="lazy" />
-      </HeroAvatarContainer>
-      <HeroInfo>
-        <HeroName>{hero.name}</HeroName>
-      </HeroInfo>
-    </HeroCardContainer>
+    <FocusContainer selected={selected}>
+      <HeroCardContainer
+        onClick={() => handleClick(hero.id)}
+        selected={selected}
+        onMouseEnter={() => setOnHover(true)}
+        onMouseLeave={() => setOnHover(false)}
+      >
+        <MemorizedHeroAvatarContainer heroImage={hero.image} onHover={onHover} />
+        <HeroInfo>
+          <HeroName>{hero.name}</HeroName>
+        </HeroInfo>
+      </HeroCardContainer>
+    </FocusContainer>
   );
 };
 
